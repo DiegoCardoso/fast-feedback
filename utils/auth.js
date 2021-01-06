@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
+import { createUser } from "./db"
 import firebase from './firebase'
 
 const authContext = createContext()
@@ -21,6 +22,7 @@ function useProvideAuth() {
       const user = formatUser(rawUser)
 
       setLoading(false)
+      createUser(user.uid, user)
       setUser(user)
       return user
     } else {
