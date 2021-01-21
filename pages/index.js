@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useAuth } from '../utils/auth'
+import { useAuth } from '@/utils/auth'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
