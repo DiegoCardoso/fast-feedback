@@ -1,5 +1,6 @@
 import { useAuth } from "@/utils/auth"
-import { Avatar, Box, Flex, Link } from "@chakra-ui/core"
+import NextLink from 'next/link'
+import { Avatar, Box, Button, Flex, Icon, Link } from "@chakra-ui/core"
 
 const DashboardShell = ({ children }) => {
   const { user } = useAuth()
@@ -16,16 +17,37 @@ const DashboardShell = ({ children }) => {
           margin="0 auto"
           w="full"
           px={8}
+          h="60px"
         >
-          <Flex>
-            <Link mr={4}>Sites</Link>
-            <Link>Feedback</Link>
+          <Flex align="center">
+            <NextLink href="/" passHref>
+              <Link>
+                <Icon name="logo" size="24px" mr={8} />
+              </Link>
+            </NextLink>
+            <NextLink href="/sites" passHref>
+              <Link mr={4}>Sites</Link>
+            </NextLink>
+            <NextLink href="/feedback" passHref>
+              <Link>Feedback</Link>
+            </NextLink>
           </Flex>
           <Flex justifyContent="center" alignItems="center">
-            <Link mr={4}>Account</Link>
-            <Avatar size="sm" src={user?.photoUrl}/>
+            {user && (
+              <>
+                <NextLink href="/account" passHref>
+                  <Button as="a" variant="ghost" mr={2}>
+                    Account
+                  </Button>
+                </NextLink>
+                <Avatar size="sm" src={user.photoUrl}/>
+              </>
+            )}
           </Flex>
         </Flex>
+      </Flex>
+      <Flex margin="0 auto" direction="column" maxW="1250px" px={[0, 8, 8]}>
+        {children}
       </Flex>
     </Box>
   )

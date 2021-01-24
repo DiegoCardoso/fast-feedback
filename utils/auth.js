@@ -20,9 +20,10 @@ function useProvideAuth() {
   const handleUser = rawUser => {
     if (rawUser) {
       const user = formatUser(rawUser)
+      const { token, ...userWithoutToken } = user
 
       setLoading(false)
-      createUser(user.uid, user)
+      createUser(user.uid, userWithoutToken)
       setUser(user)
       return user
     } else {
@@ -69,6 +70,7 @@ const formatUser = user => ({
   uid: user.uid,
   email: user.email,
   name: user.displayName,
+  token: user.xa,
   provider: user.providerData[0].providerId,
   photoUrl: user.photoURL
 })
